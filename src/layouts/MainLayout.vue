@@ -12,10 +12,8 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          {{ $route.name }}
         </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
 
