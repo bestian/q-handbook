@@ -6,9 +6,8 @@
       q-chat-message.comment#talk(v-for = "t in talks", :class="t[0].user ? 'user' : 'bot'", :sent = "t[0].user", :key="t[0].text")
         q-markdown(v-if="t[0].text") {{ t[0].text }}
         br
-        q-btns
+        .btns
           q-btn(v-for = "b in t[0].buttons" @click="say(b.payload)", :key="b.payload") {{ b.title }}
-          q-btn(v-if="!t[0].user", href="https://forms.gle/BK1HUgBzkM6MYVKT9", target="_blank") 錯誤回報
     hr
     .ui.form.container(style="width: 100%; max-width: 600px; margin: 0 auto;")
       .ui.field
@@ -35,7 +34,7 @@ export default {
   },
   methods: {
     say: function (str) {
-      console.log(str)
+      // console.log(str)
       this.talks.push([{
         user: true,
         text: str
@@ -44,7 +43,7 @@ export default {
       this.listen(str)
     },
     listen: function (str) {
-      console.log(str)
+      // console.log(str)
       if (this.intents.indexOf(str) > -1) {
         this.talks.push(this.responses['utter_' + str])
       } else {
@@ -57,7 +56,7 @@ export default {
   mounted () {
     // GET /someUrl
     this.$axios.get('http://map.alearn.org.tw/static/api/domain.json').then(response => {
-      console.log(response.data)
+      // console.log(response.data)
       this.domain = response.data
       this.intents = this.domain.intents
       this.actions = this.domain.actions
@@ -66,7 +65,7 @@ export default {
       this.listen('')
       // success callback
     }, response => {
-      console.log('error')
+      // console.log('error')
       // error callback
     })
   }
