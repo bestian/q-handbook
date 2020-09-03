@@ -1,7 +1,14 @@
 <template lang="pug">
   q-page.box.box-center
-    q-list
-      q-item(v-for = "q in f.faqs", :key = "q.q") {{ q.q }}
+    q-breadcrumbs
+      q-breadcrumbs-el(icon='home' to='/')
+      q-breadcrumbs-el(label='問答集' icon='widgets')
+    q-separator
+    q-list(bordered, separator)
+      q-item
+        h4 問答集
+      q-item(clickable,  v-ripple,  v-for = "(q, index) in f.faqs", :key = "q.q", :to = "'/ans/' + index")
+        | {{ q.q }}
 </template>
 
 <script>
@@ -9,7 +16,8 @@ export default {
   name: 'PageIndex',
   data () {
     return {
-      f: {}
+      f: {},
+      myQ: undefined
     }
   },
   mounted () {
@@ -25,3 +33,11 @@ export default {
   }
 }
 </script>
+
+<style type="text/css" scoped="">
+
+.favicon {
+    width: 16px;
+    height: 16px;
+}
+</style>
